@@ -1,7 +1,13 @@
 FROM node:7
 
-RUN npm install -g bower grunt-cli grunt gulp gulp-cli
+RUN npm install -g node-sass
+RUN npm install -g phantomjs-prebuilt webpack "@angular/cli"
 
-WORKDIR /root
+RUN apt-get update && apt-get install -y curl apt-transport-https && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn
+
+WORKDIR /workspace
 
 CMD ["bash"]
